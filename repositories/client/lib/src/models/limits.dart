@@ -13,24 +13,24 @@ class CurrencyLimits extends Equatable {
   /// Creates a new [CurrencyLimits] instance from a JSON map.
   factory CurrencyLimits.fromJson(Map<dynamic, dynamic> json) {
     return CurrencyLimits(
-      maxLimit: json['maxLimit'] as String? ?? '',
-      minLimit: json['minLimit'] as String? ?? '',
-      marketSize: json['marketSize'] as String? ?? '',
-      availableSize: json['availableSize'] as String? ?? '',
+      maxLimit: json['maxLimit'] as String?,
+      minLimit: json['minLimit'] as String?,
+      marketSize: json['marketSize'] as String?,
+      availableSize: json['availableSize'] as String?,
     );
   }
 
   /// Creates a new [CurrencyLimits] instance.
-  final String maxLimit;
+  final String? maxLimit;
 
   /// The min limit.
-  final String minLimit;
+  final String? minLimit;
 
   /// The market size.
-  final String marketSize;
+  final String? marketSize;
 
   /// The available size.
-  final String availableSize;
+  final String? availableSize;
 
   @override
   List<Object?> get props => [maxLimit, minLimit, marketSize, availableSize];

@@ -16,10 +16,10 @@ class Recommendation extends Equatable {
         .cast<String, dynamic>();
 
     return Recommendation(
-      byPrice: Offer.fromJson(data['byPrice'] as Map<dynamic, dynamic>),
-      bySpeed: Offer.fromJson(data['bySpeed'] as Map<dynamic, dynamic>),
+      byPrice: Offer.fromJson(data['byPrice'] as Map<dynamic, dynamic>? ?? {}),
+      bySpeed: Offer.fromJson(data['bySpeed'] as Map<dynamic, dynamic>? ?? {}),
       byReputation: Offer.fromJson(
-        data['byReputation'] as Map<dynamic, dynamic>,
+        data['byReputation'] as Map<dynamic, dynamic>? ?? {},
       ),
     );
   }

@@ -24,7 +24,7 @@ class OfferMakerStats extends Equatable {
   /// Creates a new [OfferMakerStats] instance from a JSON map.
   factory OfferMakerStats.fromJson(Map<dynamic, dynamic> json) {
     return OfferMakerStats(
-      userId: json['userId'] as String? ?? '',
+      userId: json['userId'] as String,
       rating: (json['rating'] as num? ?? 0).toDouble(),
       userRating: (json['userRating'] as num? ?? 0).toDouble(),
       releaseTime: (json['releaseTime'] as num? ?? 0).toDouble(),
@@ -41,8 +41,8 @@ class OfferMakerStats extends Equatable {
           .toDouble(),
       marketMakerSuccessRatio: (json['marketMakerSuccessRatio'] as num? ?? 0)
           .toDouble(),
-      userLastSeen: json['user_lastSeen'] as String? ?? '',
-      userStatus: json['user_status'] as String? ?? '',
+      userLastSeen: json['user_lastSeen'] as String?,
+      userStatus: json['user_status'] as String?,
     );
   }
 
@@ -86,10 +86,10 @@ class OfferMakerStats extends Equatable {
   final double marketMakerSuccessRatio;
 
   /// The user last seen.
-  final String userLastSeen;
+  final String? userLastSeen;
 
   /// The user status.
-  final String userStatus;
+  final String? userStatus;
 
   /// Converts the [OfferMakerStats] instance to a JSON map.
   Map<String, dynamic> toJson() {

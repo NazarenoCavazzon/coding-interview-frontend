@@ -1,4 +1,5 @@
 import 'package:client/client.dart';
+import 'package:decimal/decimal.dart';
 import 'package:http/http.dart' as http;
 import 'package:test/test.dart';
 
@@ -24,12 +25,12 @@ class MockHttpClient extends http.BaseClient {
 
 void main() {
   group('HttpClient', () {
-    late HttpClient client;
+    late ElDoradoApiClient client;
     late MockHttpClient mockHttpClient;
 
     setUp(() {
       mockHttpClient = MockHttpClient((_) async => http.Response('', 200));
-      client = HttpClient(httpClient: mockHttpClient);
+      client = ElDoradoApiClient.stage(httpClient: mockHttpClient);
     });
 
     test('should make correct HTTP request', () async {
@@ -38,13 +39,13 @@ void main() {
         capturedRequest = request;
         return http.Response(_mockResponseBody, 200);
       });
-      client = HttpClient(httpClient: mockHttpClient);
+      client = ElDoradoApiClient.stage(httpClient: mockHttpClient);
 
       await client.getRecommendations(
-        type: ExchangeType.cryptoToFiat,
+        type: ExchangeType.offRamp,
         cryptoCurrencyId: 'TATUM-TRON-USDT',
         fiatCurrencyId: 'COP',
-        amount: 100,
+        amount: Decimal.fromInt(100),
         amountCurrencyId: 'TATUM-TRON-USDT',
       );
 
@@ -63,7 +64,7 @@ void main() {
         capturedRequest!.url.queryParameters['fiatCurrencyId'],
         equals('COP'),
       );
-      expect(capturedRequest!.url.queryParameters['amount'], equals('100.0'));
+      expect(capturedRequest!.url.queryParameters['amount'], equals('100'));
       expect(
         capturedRequest!.url.queryParameters['amountCurrencyId'],
         equals('TATUM-TRON-USDT'),
@@ -74,13 +75,13 @@ void main() {
       mockHttpClient = MockHttpClient(
         (_) async => http.Response(_mockResponseBody, 200),
       );
-      client = HttpClient(httpClient: mockHttpClient);
+      client = ElDoradoApiClient.stage(httpClient: mockHttpClient);
 
       final result = await client.getRecommendations(
-        type: ExchangeType.cryptoToFiat,
+        type: ExchangeType.offRamp,
         cryptoCurrencyId: 'TATUM-TRON-USDT',
         fiatCurrencyId: 'COP',
-        amount: 100,
+        amount: Decimal.fromInt(100),
         amountCurrencyId: 'TATUM-TRON-USDT',
       );
 
@@ -94,43 +95,18 @@ void main() {
       mockHttpClient = MockHttpClient(
         (_) async => http.Response('Not Found', 404),
       );
-      client = HttpClient(httpClient: mockHttpClient);
+      client = ElDoradoApiClient.stage(httpClient: mockHttpClient);
 
       expect(
         () async => client.getRecommendations(
-          type: ExchangeType.cryptoToFiat,
+          type: ExchangeType.offRamp,
           cryptoCurrencyId: 'TATUM-TRON-USDT',
           fiatCurrencyId: 'COP',
-          amount: 100,
+          amount: Decimal.fromInt(100),
           amountCurrencyId: 'TATUM-TRON-USDT',
         ),
-        throwsA(isA<HttpClientException>()),
+        throwsA(isA<ElDoradoApiClientException>()),
       );
-    });
-
-    test('should handle custom base URL', () async {
-      const customBaseUrl = 'https://custom-api.com/v1';
-      http.BaseRequest? capturedRequest;
-      mockHttpClient = MockHttpClient((request) async {
-        capturedRequest = request;
-        return http.Response(_mockResponseBody, 200);
-      });
-      client = HttpClient(httpClient: mockHttpClient, baseUrl: customBaseUrl);
-
-      await client.getRecommendations(
-        type: ExchangeType.fiatToCrypto,
-        cryptoCurrencyId: 'TATUM-TRON-USDT',
-        fiatCurrencyId: 'COP',
-        amount: 100,
-        amountCurrencyId: 'COP',
-      );
-
-      expect(capturedRequest!.url.host, equals('custom-api.com'));
-      expect(
-        capturedRequest!.url.path,
-        equals('/v1/orderbook/public/recommendations'),
-      );
-      expect(capturedRequest!.url.queryParameters['type'], equals('1'));
     });
 
     test('should dispose HTTP client correctly', () {
@@ -140,8 +116,8 @@ void main() {
 
   group('ExchangeType', () {
     test('should have correct values', () {
-      expect(ExchangeType.cryptoToFiat.value, equals(0));
-      expect(ExchangeType.fiatToCrypto.value, equals(1));
+      expect(ExchangeType.offRamp.value, equals(0));
+      expect(ExchangeType.onRamp.value, equals(1));
     });
   });
 }

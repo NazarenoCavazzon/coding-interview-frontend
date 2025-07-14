@@ -7,6 +7,6 @@ Future<void> main() async {
   await bootstrap(() async {
     WidgetsFlutterBinding.ensureInitialized();
 
-    return App(client: HttpClient());
+    return App(client: ElDoradoApiClient.stage());
   });
 }

@@ -41,49 +41,48 @@ class Offer extends Equatable {
   /// Creates a new [Offer] instance from a JSON map.
   factory Offer.fromJson(Map<dynamic, dynamic> json) {
     return Offer(
-      offerId: json['offerId'] as String? ?? '',
-      user: User.fromJson(json['user'] as Map<dynamic, dynamic>),
+      offerId: json['offerId'] as String?,
+      user: User.fromJson(json['user'] as Map<dynamic, dynamic>? ?? {}),
       offerStatus: json['offerStatus'] as int? ?? 0,
       offerType: json['offerType'] as int? ?? 0,
-      createdAt: json['createdAt'] as String? ?? '',
-      description: json['description'] as String? ?? '',
-      cryptoCurrencyId: json['cryptoCurrencyId'] as String? ?? '',
+      createdAt: json['createdAt'] as String?,
+      description: json['description'] as String?,
+      cryptoCurrencyId: json['cryptoCurrencyId'] as String?,
       chain: json['chain'] as String?,
-      fiatCurrencyId: json['fiatCurrencyId'] as String? ?? '',
-      maxLimit: json['maxLimit'] as String? ?? '',
-      minLimit: json['minLimit'] as String? ?? '',
-      marketSize: json['marketSize'] as String? ?? '',
-      availableSize: json['availableSize'] as String? ?? '',
-      limits: Limits.fromJson(json['limits'] as Map<dynamic, dynamic>),
+      fiatCurrencyId: json['fiatCurrencyId'] as String?,
+      maxLimit: json['maxLimit'] as String?,
+      minLimit: json['minLimit'] as String?,
+      marketSize: json['marketSize'] as String?,
+      availableSize: json['availableSize'] as String?,
+      limits: Limits.fromJson(json['limits'] as Map<dynamic, dynamic>? ?? {}),
       isDepleted: json['isDepleted'] as bool? ?? false,
-      fiatToCryptoExchangeRate:
-          json['fiatToCryptoExchangeRate'] as String? ?? '',
+      fiatToCryptoExchangeRate: json['fiatToCryptoExchangeRate'] as String?,
       offerMakerStats: OfferMakerStats.fromJson(
-        json['offerMakerStats'] as Map<dynamic, dynamic>,
+        json['offerMakerStats'] as Map<dynamic, dynamic>? ?? {},
       ),
       paymentMethods: List<String>.from(
-        json['paymentMethods'] as List<dynamic>,
+        json['paymentMethods'] as List<dynamic>? ?? [],
       ),
-      usdRate: json['usdRate'] as String? ?? '',
+      usdRate: json['usdRate'] as String?,
       paused: json['paused'] as bool? ?? false,
-      userStatus: json['user_status'] as String? ?? '',
-      userLastSeen: json['user_lastSeen'] as String? ?? '',
+      userStatus: json['user_status'] as String?,
+      userLastSeen: json['user_lastSeen'] as String?,
       display: json['display'] as bool? ?? false,
-      visibility: json['visibility'] as String? ?? '',
+      visibility: json['visibility'] as String?,
       paymentMethodFilter: List<String>.from(
-        json['paymentMethodFilter'] as List<dynamic>,
+        json['paymentMethodFilter'] as List<dynamic>? ?? [],
       ),
       orderRequestEnabled: json['orderRequestEnabled'] as bool? ?? false,
       offerTransactionsEnabled:
           json['offerTransactionsEnabled'] as bool? ?? false,
-      escrow: json['escrow'] as String? ?? '',
+      escrow: json['escrow'] as String?,
       allowsThirdPartyPayments:
           json['allowsThirdPartyPayments'] as bool? ?? false,
     );
   }
 
   /// The offer ID.
-  final String offerId;
+  final String? offerId;
 
   /// The user.
   final User user;
@@ -95,31 +94,31 @@ class Offer extends Equatable {
   final int offerType;
 
   /// The created at.
-  final String createdAt;
+  final String? createdAt;
 
   /// The description.
-  final String description;
+  final String? description;
 
   /// The crypto currency ID.
-  final String cryptoCurrencyId;
+  final String? cryptoCurrencyId;
 
   /// The chain.
   final String? chain;
 
   /// The fiat currency ID.
-  final String fiatCurrencyId;
+  final String? fiatCurrencyId;
 
   /// The max limit.
-  final String maxLimit;
+  final String? maxLimit;
 
   /// The min limit.
-  final String minLimit;
+  final String? minLimit;
 
   /// The market size.
-  final String marketSize;
+  final String? marketSize;
 
   /// The available size.
-  final String availableSize;
+  final String? availableSize;
 
   /// The limits.
   final Limits limits;
@@ -128,7 +127,7 @@ class Offer extends Equatable {
   final bool isDepleted;
 
   /// The fiat to crypto exchange rate.
-  final String fiatToCryptoExchangeRate;
+  final String? fiatToCryptoExchangeRate;
 
   /// The offer maker stats.
   final OfferMakerStats offerMakerStats;
@@ -137,22 +136,22 @@ class Offer extends Equatable {
   final List<String> paymentMethods;
 
   /// The USD rate.
-  final String usdRate;
+  final String? usdRate;
 
   /// The paused.
   final bool paused;
 
   /// The user status.
-  final String userStatus;
+  final String? userStatus;
 
   /// The user last seen.
-  final String userLastSeen;
+  final String? userLastSeen;
 
   /// The display.
   final bool display;
 
   /// The visibility.
-  final String visibility;
+  final String? visibility;
 
   /// The payment method filter.
   final List<String> paymentMethodFilter;
@@ -164,7 +163,7 @@ class Offer extends Equatable {
   final bool offerTransactionsEnabled;
 
   /// The escrow.
-  final String escrow;
+  final String? escrow;
 
   /// The allows third party payments.
   final bool allowsThirdPartyPayments;

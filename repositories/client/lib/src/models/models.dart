@@ -1,3 +1,4 @@
+export 'currency.dart';
 export 'exchange_type.dart';
 export 'limits.dart';
 export 'offer.dart';

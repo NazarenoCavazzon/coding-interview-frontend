@@ -8,8 +8,8 @@ class User extends Equatable {
   /// Creates a new [User] instance from a JSON map.
   factory User.fromJson(Map<dynamic, dynamic> json) {
     return User(
-      id: json['id'] as String? ?? '',
-      username: json['username'] as String? ?? '',
+      id: json['id'] as String,
+      username: json['username'] as String?,
     );
   }
 
@@ -17,7 +17,7 @@ class User extends Equatable {
   final String id;
 
   /// The user's username.
-  final String username;
+  final String? username;
 
   @override
   List<Object?> get props => [id, username];

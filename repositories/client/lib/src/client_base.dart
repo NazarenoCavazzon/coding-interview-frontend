@@ -1,4 +1,5 @@
 import 'package:client/src/models/models.dart';
+import 'package:decimal/decimal.dart';
 
 /// Base class for the client.
 abstract class ClientBase {
@@ -8,7 +9,7 @@ abstract class ClientBase {
     required ExchangeType type,
     required String cryptoCurrencyId,
     required String fiatCurrencyId,
-    required double amount,
+    required Decimal amount,
     required String amountCurrencyId,
   });
 

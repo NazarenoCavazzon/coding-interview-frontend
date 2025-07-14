@@ -30,7 +30,7 @@ import 'package:client/client.dart';
 void main() async {
   // Create a client instance
   final client = HttpClient();
-  
+
   try {
     // Get recommendations for CRYPTO to FIAT exchange
     final response = await client.getRecommendations(
@@ -40,15 +40,15 @@ void main() async {
       amount: 100.0,
       amountCurrencyId: 'TATUM-TRON-USDT',
     );
-    
+
     // Access the exchange rate
     final exchangeRate = response.data.byPrice.fiatToCryptoExchangeRate;
     print('Exchange rate: $exchangeRate');
-    
+
     // Calculate result
     final result = 100.0 * double.parse(exchangeRate);
     print('100 USDT = $result COP');
-    
+
   } on HttpClientException catch (e) {
     print('Error: ${e.message}');
   } finally {
@@ -67,15 +67,15 @@ import 'package:http/http.dart' as http;
 void main() async {
   // Custom HTTP client with timeout
   final httpClient = http.Client();
-  
+
   // Custom base URL (useful for testing)
   final client = HttpClient(
     httpClient: httpClient,
     baseUrl: 'https://custom-api.com/v1',
   );
-  
+
   // Use the client...
-  
+
   client.dispose();
 }
 ```
@@ -114,7 +114,7 @@ import 'package:client/client.dart';
 class MockHttpClient extends http.BaseClient {
   final Future<http.Response> Function(http.BaseRequest) _handler;
   MockHttpClient(this._handler);
-  
+
   @override
   Future<http.StreamedResponse> send(http.BaseRequest request) async {
     final response = await _handler(request);
@@ -133,9 +133,9 @@ void main() {
     final mockClient = MockHttpClient((request) async {
       return http.Response('{"data": {...}}', 200);
     });
-    
+
     final client = HttpClient(httpClient: mockClient);
-    
+
     // Act
     final response = await client.getRecommendations(
       type: ExchangeType.cryptoToFiat,
@@ -144,7 +144,7 @@ void main() {
       amount: 100.0,
       amountCurrencyId: 'TATUM-TRON-USDT',
     );
-    
+
     // Assert
     expect(response, isA<RecommendationResponse>());
   });

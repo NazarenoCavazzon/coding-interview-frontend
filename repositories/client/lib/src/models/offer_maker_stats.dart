@@ -1,5 +1,7 @@
+import 'package:equatable/equatable.dart';
+
 /// Offer maker stats model.
-class OfferMakerStats {
+class OfferMakerStats extends Equatable {
   /// Creates a new [OfferMakerStats] instance.
   const OfferMakerStats({
     required this.userId,
@@ -109,4 +111,23 @@ class OfferMakerStats {
       'user_status': userStatus,
     };
   }
+
+  @override
+  List<Object?> get props => [
+    userId,
+    rating,
+    userRating,
+    releaseTime,
+    payTime,
+    responseTime,
+    totalOffersCount,
+    totalTransactionCount,
+    marketMakerTransactionCount,
+    marketTakerTransactionCount,
+    uniqueTradersCount,
+    marketMakerOrderTime,
+    marketMakerSuccessRatio,
+    userLastSeen,
+    userStatus,
+  ];
 }

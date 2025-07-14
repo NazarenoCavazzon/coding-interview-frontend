@@ -1,5 +1,7 @@
+import 'package:equatable/equatable.dart';
+
 /// Currency limits model.
-class CurrencyLimits {
+class CurrencyLimits extends Equatable {
   /// Creates a new [CurrencyLimits] instance.
   const CurrencyLimits({
     required this.maxLimit,
@@ -29,6 +31,9 @@ class CurrencyLimits {
 
   /// The available size.
   final String availableSize;
+
+  @override
+  List<Object?> get props => [maxLimit, minLimit, marketSize, availableSize];
 }
 
 /// Limits model.

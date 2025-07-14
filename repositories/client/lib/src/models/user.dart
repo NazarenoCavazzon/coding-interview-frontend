@@ -1,5 +1,7 @@
+import 'package:equatable/equatable.dart';
+
 /// User model.
-class User {
+class User extends Equatable {
   /// Creates a new [User] instance.
   const User({required this.id, required this.username});
 
@@ -16,4 +18,7 @@ class User {
 
   /// The user's username.
   final String username;
+
+  @override
+  List<Object?> get props => [id, username];
 }

@@ -1,9 +1,10 @@
 import 'package:client/src/models/limits.dart';
 import 'package:client/src/models/offer_maker_stats.dart';
 import 'package:client/src/models/user.dart';
+import 'package:equatable/equatable.dart';
 
 /// Offer model.
-class Offer {
+class Offer extends Equatable {
   /// Creates a new [Offer] instance.
   const Offer({
     required this.offerId,
@@ -167,4 +168,37 @@ class Offer {
 
   /// The allows third party payments.
   final bool allowsThirdPartyPayments;
+
+  @override
+  List<Object?> get props => [
+    offerId,
+    user,
+    offerStatus,
+    offerType,
+    createdAt,
+    description,
+    cryptoCurrencyId,
+    chain,
+    fiatCurrencyId,
+    maxLimit,
+    minLimit,
+    marketSize,
+    availableSize,
+    limits,
+    isDepleted,
+    fiatToCryptoExchangeRate,
+    offerMakerStats,
+    paymentMethods,
+    usdRate,
+    paused,
+    userStatus,
+    userLastSeen,
+    display,
+    visibility,
+    paymentMethodFilter,
+    orderRequestEnabled,
+    offerTransactionsEnabled,
+    escrow,
+    allowsThirdPartyPayments,
+  ];
 }

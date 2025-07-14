@@ -1,7 +1,8 @@
 import 'package:client/src/models/offer.dart';
+import 'package:equatable/equatable.dart';
 
 /// Recommendation data model.
-class Recommendation {
+class Recommendation extends Equatable {
   /// Creates a new [Recommendation] instance.
   const Recommendation({
     required this.byPrice,
@@ -31,4 +32,7 @@ class Recommendation {
 
   /// The offer by reputation.
   final Offer byReputation;
+
+  @override
+  List<Object?> get props => [byPrice, bySpeed, byReputation];
 }

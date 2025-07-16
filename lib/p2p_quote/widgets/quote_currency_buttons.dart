@@ -88,7 +88,7 @@ class SelectedCurrencies extends StatelessWidget {
           final (
             Currency firstCurrency,
             Currency secondCurrency,
-          ) = state.exchangeType == ExchangeType.offRamp
+          ) = state.exchangeType == ExchangeType.onRamp
               ? (state.fiatCurrency, state.cryptoCurrency)
               : (state.cryptoCurrency, state.fiatCurrency);
 

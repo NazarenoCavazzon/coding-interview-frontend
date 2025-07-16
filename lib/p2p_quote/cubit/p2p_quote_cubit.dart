@@ -33,7 +33,9 @@ class P2PQuoteCubit extends Cubit<P2PQuoteState> {
         cryptoCurrencyId: state.cryptoCurrency.id,
         exchangeType: state.exchangeType,
         amount: state.amount!,
-        amountCurrencyId: state.fiatCurrency.id,
+        amountCurrencyId: state.exchangeType == ExchangeType.onRamp
+            ? state.fiatCurrency.id
+            : state.cryptoCurrency.id,
       );
 
       emit(

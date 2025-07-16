@@ -20,7 +20,7 @@ class QuoteInfoSection extends StatelessWidget {
         final cryptoCurrency = state.cryptoCurrency;
 
         final rateSymbol = fiatCurrency.displaySymbol;
-        final amountSymbol = state.exchangeType == ExchangeType.offRamp
+        final amountSymbol = state.exchangeType == ExchangeType.onRamp
             ? cryptoCurrency.displaySymbol
             : fiatCurrency.displaySymbol;
 
@@ -32,7 +32,7 @@ class QuoteInfoSection extends StatelessWidget {
           final releaseTime = quote.bySpeed.offerMakerStats.releaseTime;
 
           exchangeRate = quote.byPrice.fiatToCryptoExchangeRate;
-          totalAmount = state.exchangeType == ExchangeType.onRamp
+          totalAmount = state.exchangeType == ExchangeType.offRamp
               ? (amount * num.parse(exchangeRate)).toStringAsFixed(2)
               : (amount / num.parse(exchangeRate)).toStringAsFixed(2);
           releaseTimeString = releaseTime < 1.0

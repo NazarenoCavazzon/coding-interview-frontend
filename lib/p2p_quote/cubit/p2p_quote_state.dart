@@ -8,7 +8,7 @@ const defaultCryptoCurrency = CryptoCurrency.usdt;
 class P2PQuoteState extends Equatable {
   const P2PQuoteState({
     this.status = P2PQuoteStatus.initial,
-    this.exchangeType = ExchangeType.offRamp,
+    this.exchangeType = ExchangeType.onRamp,
     this.fiatCurrency = defaultFiatCurrency,
     this.cryptoCurrency = defaultCryptoCurrency,
     this.recommendation,

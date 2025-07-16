@@ -11,7 +11,7 @@ class QuoteCurrencyInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final currency = context.select<P2PQuoteCubit, Currency>(
-      (cubit) => cubit.state.exchangeType == ExchangeType.onRamp
+      (cubit) => cubit.state.exchangeType == ExchangeType.offRamp
           ? cubit.state.cryptoCurrency
           : cubit.state.fiatCurrency,
     );

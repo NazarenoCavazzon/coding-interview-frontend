@@ -1,9 +1,9 @@
 /// Exchange type model.
 enum ExchangeType {
-  /// Off ramp.
+  /// User exchanges crypto for fiat.
   offRamp(0),
 
-  /// On ramp.
+  /// User exchanges fiat for crypto.
   onRamp(1);
 
   const ExchangeType(this.value);

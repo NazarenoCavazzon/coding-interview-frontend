@@ -1,7 +1,7 @@
-import 'package:client/src/models/limits.dart';
-import 'package:client/src/models/offer_maker_stats.dart';
-import 'package:client/src/models/user.dart';
 import 'package:equatable/equatable.dart';
+import 'package:recommendation_repository/src/models/limits.dart';
+import 'package:recommendation_repository/src/models/offer_maker_stats.dart';
+import 'package:recommendation_repository/src/models/user.dart';
 
 /// Offer model.
 class Offer extends Equatable {
@@ -56,7 +56,7 @@ class Offer extends Equatable {
       availableSize: json['availableSize'] as String?,
       limits: Limits.fromJson(json['limits'] as Map<dynamic, dynamic>? ?? {}),
       isDepleted: json['isDepleted'] as bool? ?? false,
-      fiatToCryptoExchangeRate: json['fiatToCryptoExchangeRate'] as String?,
+      fiatToCryptoExchangeRate: json['fiatToCryptoExchangeRate'] as String,
       offerMakerStats: OfferMakerStats.fromJson(
         json['offerMakerStats'] as Map<dynamic, dynamic>? ?? {},
       ),
@@ -127,7 +127,7 @@ class Offer extends Equatable {
   final bool isDepleted;
 
   /// The fiat to crypto exchange rate.
-  final String? fiatToCryptoExchangeRate;
+  final String fiatToCryptoExchangeRate;
 
   /// The offer maker stats.
   final OfferMakerStats offerMakerStats;

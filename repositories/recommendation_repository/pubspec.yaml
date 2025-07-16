@@ -1,0 +1,18 @@
+name: recommendation_repository
+description: A repository for managing currency exchange recommendations.
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: ^3.8.1
+
+dependencies:
+  client:
+    path: ../client
+  decimal: ^3.0.2
+  equatable: ^2.0.7
+
+dev_dependencies:
+  lints: ^5.0.0
+  test: ^1.24.0
+  very_good_analysis: ^9.0.0

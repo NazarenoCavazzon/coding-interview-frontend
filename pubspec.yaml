@@ -11,10 +11,16 @@ dependencies:
   client:
     path: ./repositories/client
   cupertino_icons: ^1.0.8
+  decimal: ^3.2.4
   equatable: ^2.0.7
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.1
+  recommendation_repository:
+    path: ./repositories/recommendation_repository
+  shimmer: ^3.0.0
+  ui:
+    path: ./repositories/ui
 
 dev_dependencies:
   flutter_lints: ^5.0.0
@@ -24,3 +30,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/cripto_currencies/
+    - assets/fiat_currencies/

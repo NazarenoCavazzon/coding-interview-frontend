@@ -1,16 +1,17 @@
 import 'package:client/client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:recommendation_repository/recommendation_repository.dart';
 
 class App extends StatelessWidget {
   const App({required this.client, super.key});
 
-  final HttpClient client;
+  final ElDoradoApiClient client;
 
   @override
   Widget build(BuildContext context) {
     return RepositoryProvider(
-      create: (context) => client,
+      create: (context) => RecommendationRepository(client: client),
       child: const AppView(),
     );
   }

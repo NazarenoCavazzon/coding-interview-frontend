@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_dynamic_calls
+
 import 'package:client/client.dart';
 import 'package:decimal/decimal.dart';
 import 'package:http/http.dart' as http;
@@ -24,13 +26,17 @@ class MockHttpClient extends http.BaseClient {
 }
 
 void main() {
-  group('HttpClient', () {
+  group('ElDoradoApiClient', () {
     late ElDoradoApiClient client;
     late MockHttpClient mockHttpClient;
 
     setUp(() {
-      mockHttpClient = MockHttpClient((_) async => http.Response('', 200));
+      mockHttpClient = MockHttpClient((_) async => http.Response('{}', 200));
       client = ElDoradoApiClient.stage(httpClient: mockHttpClient);
+    });
+
+    tearDown(() {
+      client.dispose();
     });
 
     test('should make correct HTTP request', () async {
@@ -42,7 +48,7 @@ void main() {
       client = ElDoradoApiClient.stage(httpClient: mockHttpClient);
 
       await client.getRecommendations(
-        type: ExchangeType.offRamp,
+        exchangeType: ExchangeType.offRamp.value,
         cryptoCurrencyId: 'TATUM-TRON-USDT',
         fiatCurrencyId: 'COP',
         amount: Decimal.fromInt(100),
@@ -71,27 +77,35 @@ void main() {
       );
     });
 
-    test('should parse successful response correctly', () async {
+    test('should return JSON response on successful request', () async {
       mockHttpClient = MockHttpClient(
         (_) async => http.Response(_mockResponseBody, 200),
       );
       client = ElDoradoApiClient.stage(httpClient: mockHttpClient);
 
       final result = await client.getRecommendations(
-        type: ExchangeType.offRamp,
+        exchangeType: ExchangeType.offRamp.value,
         cryptoCurrencyId: 'TATUM-TRON-USDT',
         fiatCurrencyId: 'COP',
         amount: Decimal.fromInt(100),
         amountCurrencyId: 'TATUM-TRON-USDT',
       );
 
-      expect(result, isA<Recommendation>());
-      expect(result.byPrice.fiatToCryptoExchangeRate, equals('3965.55'));
-      expect(result.byPrice.cryptoCurrencyId, equals('TATUM-TRON-USDT'));
-      expect(result.byPrice.fiatCurrencyId, equals('COP'));
+      expect(result, isA<Map<String, dynamic>>());
+      expect(result['data'], isA<Map<String, dynamic>>());
+      expect(result['data']['byPrice'], isA<Map<String, dynamic>>());
+      expect(
+        result['data']['byPrice']['fiatToCryptoExchangeRate'],
+        equals('3965.55'),
+      );
+      expect(
+        result['data']['byPrice']['cryptoCurrencyId'],
+        equals('TATUM-TRON-USDT'),
+      );
+      expect(result['data']['byPrice']['fiatCurrencyId'], equals('COP'));
     });
 
-    test('should throw exception on HTTP error', () async {
+    test('should throw HttpClientException on HTTP error', () async {
       mockHttpClient = MockHttpClient(
         (_) async => http.Response('Not Found', 404),
       );
@@ -99,14 +113,87 @@ void main() {
 
       expect(
         () async => client.getRecommendations(
-          type: ExchangeType.offRamp,
+          exchangeType: ExchangeType.offRamp.value,
           cryptoCurrencyId: 'TATUM-TRON-USDT',
           fiatCurrencyId: 'COP',
           amount: Decimal.fromInt(100),
           amountCurrencyId: 'TATUM-TRON-USDT',
         ),
-        throwsA(isA<ElDoradoApiClientException>()),
+        throwsA(isA<HttpClientException>()),
       );
+    });
+
+    test('should throw HttpClientException on server error', () async {
+      mockHttpClient = MockHttpClient(
+        (_) async => http.Response('Internal Server Error', 500),
+      );
+      client = ElDoradoApiClient.stage(httpClient: mockHttpClient);
+
+      expect(
+        () async => client.getRecommendations(
+          exchangeType: ExchangeType.offRamp.value,
+          cryptoCurrencyId: 'TATUM-TRON-USDT',
+          fiatCurrencyId: 'COP',
+          amount: Decimal.fromInt(100),
+          amountCurrencyId: 'TATUM-TRON-USDT',
+        ),
+        throwsA(isA<HttpClientException>()),
+      );
+    });
+
+    test('should throw HttpClientException with correct status code', () async {
+      mockHttpClient = MockHttpClient(
+        (_) async => http.Response('Unauthorized', 401),
+      );
+      client = ElDoradoApiClient.stage(httpClient: mockHttpClient);
+
+      try {
+        await client.getRecommendations(
+          exchangeType: ExchangeType.offRamp.value,
+          cryptoCurrencyId: 'TATUM-TRON-USDT',
+          fiatCurrencyId: 'COP',
+          amount: Decimal.fromInt(100),
+          amountCurrencyId: 'TATUM-TRON-USDT',
+        );
+        fail('Expected HttpClientException to be thrown');
+      } on HttpClientException catch (e) {
+        expect(e.statusCode, equals(401));
+        expect(e.message, equals('HTTP request failed'));
+      }
+    });
+
+    test('should handle malformed JSON response', () async {
+      mockHttpClient = MockHttpClient(
+        (_) async => http.Response('invalid json', 200),
+      );
+      client = ElDoradoApiClient.stage(httpClient: mockHttpClient);
+
+      expect(
+        () async => client.getRecommendations(
+          exchangeType: ExchangeType.offRamp.value,
+          cryptoCurrencyId: 'TATUM-TRON-USDT',
+          fiatCurrencyId: 'COP',
+          amount: Decimal.fromInt(100),
+          amountCurrencyId: 'TATUM-TRON-USDT',
+        ),
+        throwsA(isA<FormatException>()),
+      );
+    });
+
+    test('should handle empty response', () async {
+      mockHttpClient = MockHttpClient((_) async => http.Response('{}', 200));
+      client = ElDoradoApiClient.stage(httpClient: mockHttpClient);
+
+      final result = await client.getRecommendations(
+        exchangeType: ExchangeType.offRamp.value,
+        cryptoCurrencyId: 'TATUM-TRON-USDT',
+        fiatCurrencyId: 'COP',
+        amount: Decimal.fromInt(100),
+        amountCurrencyId: 'TATUM-TRON-USDT',
+      );
+
+      expect(result, isA<Map<String, dynamic>>());
+      expect(result, isEmpty);
     });
 
     test('should dispose HTTP client correctly', () {
@@ -118,6 +205,22 @@ void main() {
     test('should have correct values', () {
       expect(ExchangeType.offRamp.value, equals(0));
       expect(ExchangeType.onRamp.value, equals(1));
+    });
+  });
+
+  group('HttpClientException', () {
+    test('should have correct string representation', () {
+      const exception = HttpClientException('Test message', 404);
+      expect(
+        exception.toString(),
+        equals('HttpClientException: Test message (Status: 404)'),
+      );
+    });
+
+    test('should have correct properties', () {
+      const exception = HttpClientException('Test message', 404);
+      expect(exception.message, equals('Test message'));
+      expect(exception.statusCode, equals(404));
     });
   });
 }

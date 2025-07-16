@@ -1,18 +1,16 @@
 name: client
-description: A starting point for Dart libraries or applications.
+description: A client for the challenge Eldorado.
 version: 1.0.0
-# repository: https://github.com/my_org/my_repo
+publish_to: none
 
 environment:
   sdk: ^3.8.1
 
-# Add regular dependencies here.
 dependencies:
   decimal: ^3.0.2
   equatable: ^2.0.7
   http: ^1.4.0
   very_good_analysis: ^9.0.0
-  # path: ^1.8.0
 
 dev_dependencies:
   lints: ^5.0.0

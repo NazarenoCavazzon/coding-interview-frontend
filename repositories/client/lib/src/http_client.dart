@@ -1,7 +1,6 @@
 import 'dart:convert';
 
-import 'package:client/src/client_base.dart';
-import 'package:client/src/models/models.dart';
+import 'package:client/src/http_client_base.dart';
 import 'package:decimal/decimal.dart';
 import 'package:http/http.dart' as http;
 
@@ -9,7 +8,7 @@ const _stageBaseUrl =
     'https://74j6q7lg6a.execute-api.eu-west-1.amazonaws.com/stage';
 
 /// HTTP client for the El Dorado API.
-class ElDoradoApiClient implements ClientBase {
+class ElDoradoApiClient implements HttpClientBase {
   /// Creates a new [ElDoradoApiClient] instance.
   ElDoradoApiClient._({required String baseUrl, http.Client? httpClient})
     : _httpClient = httpClient ?? http.Client(),
@@ -22,44 +21,40 @@ class ElDoradoApiClient implements ClientBase {
   final http.Client _httpClient;
   final String _baseUrl;
 
+  /// Private generic get method for making HTTP requests.
+  Future<Map<String, dynamic>> _get(
+    String endpoint,
+    Map<String, String> queryParameters,
+  ) async {
+    final uri = Uri.parse(
+      '$_baseUrl$endpoint',
+    ).replace(queryParameters: queryParameters);
+
+    final response = await _httpClient.get(uri);
+
+    if (response.statusCode == 200) {
+      final json = jsonDecode(response.body) as Map<String, dynamic>;
+      return json;
+    } else {
+      throw HttpClientException('HTTP request failed', response.statusCode);
+    }
+  }
+
   @override
-  Future<Recommendation> getRecommendations({
-    required ExchangeType type,
+  Future<Map<String, dynamic>> getRecommendations({
+    required int exchangeType,
     required String cryptoCurrencyId,
     required String fiatCurrencyId,
     required Decimal amount,
     required String amountCurrencyId,
   }) async {
-    final uri = Uri.parse('$_baseUrl/orderbook/public/recommendations').replace(
-      queryParameters: {
-        'type': type.value.toString(),
-        'cryptoCurrencyId': cryptoCurrencyId,
-        'fiatCurrencyId': fiatCurrencyId,
-        'amount': amount.toString(),
-        'amountCurrencyId': amountCurrencyId,
-      },
-    );
-
-    final response = await _httpClient.get(uri);
-
-    if (response.statusCode == 200) {
-      final json = jsonDecode(response.body) as Map<dynamic, dynamic>;
-      final data = json['data'];
-
-      if (data is! Map<dynamic, dynamic> || data.isEmpty) {
-        throw ElDoradoApiClientException(
-          'No data found in the response',
-          response.statusCode,
-        );
-      }
-
-      return Recommendation.fromJson(json);
-    } else {
-      throw ElDoradoApiClientException(
-        'Failed to get recommendations: ${response.statusCode}',
-        response.statusCode,
-      );
-    }
+    return _get('/orderbook/public/recommendations', {
+      'type': exchangeType.toString(),
+      'cryptoCurrencyId': cryptoCurrencyId,
+      'fiatCurrencyId': fiatCurrencyId,
+      'amount': amount.toString(),
+      'amountCurrencyId': amountCurrencyId,
+    });
   }
 
   /// Disposes the [ElDoradoApiClient] instance.
@@ -70,9 +65,9 @@ class ElDoradoApiClient implements ClientBase {
 }
 
 /// Exception thrown when an HTTP client error occurs.
-class ElDoradoApiClientException implements Exception {
-  /// Creates a new [ElDoradoApiClientException] instance.
-  const ElDoradoApiClientException(this.message, this.statusCode);
+class HttpClientException implements Exception {
+  /// Creates a new [HttpClientException] instance.
+  const HttpClientException(this.message, this.statusCode);
 
   /// The error message.
   final String message;
@@ -80,8 +75,7 @@ class ElDoradoApiClientException implements Exception {
   /// The HTTP status code.
   final int statusCode;
 
-  /// Returns a string representation of the [ElDoradoApiClientException].
+  /// Returns a string representation of the [HttpClientException].
   @override
-  String toString() =>
-      'ElDoradoApiClientException: $message (Status: $statusCode)';
+  String toString() => 'HttpClientException: $message (Status: $statusCode)';
 }

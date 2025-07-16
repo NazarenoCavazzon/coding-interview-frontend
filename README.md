@@ -1,126 +1,167 @@
 # Challenge Eldorado - P2P Quote Application
 
-A Flutter web application for P2P cryptocurrency quotes, built as part of the Eldorado coding challenge.
+A Flutter web application implementing a P2P cryptocurrency quote interface, built using Very Good Ventures' layered architecture and modern Flutter best practices.
 
-## 🚀 Live Demo
+## 🌐 Live Demo
 
-The app is automatically deployed to GitHub Pages: [View Live Demo](https://[your-username].github.io/coding-interview-frontend/)
+**[View Application](https://nazarenocavazzon.github.io/coding-interview-frontend/)**
 
-## 🛠️ Quick Start
+## 🏗️ Architecture Overview
 
-### Prerequisites
-- Flutter SDK (3.8.1 or higher)
-- Dart SDK
-- Git
+This application follows **Very Good Ventures' layered architecture**, implementing separation of concerns through multiple layers:
 
-### Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/[your-username]/coding-interview-frontend.git
-   cd coding-interview-frontend
-   ```
-
-2. Install dependencies:
-   ```bash
-   flutter pub get
-   cd repositories/client && flutter pub get && cd ../..
-   cd repositories/i18n && flutter pub get && cd ../..
-   cd repositories/ui && flutter pub get && cd ../..
-   cd repositories/recommendation_repository && flutter pub get && cd ../..
-   ```
-
-3. Run the application:
-   ```bash
-   flutter run -d chrome
-   ```
-
-## 🚀 Deployment
-
-### Automatic Deployment
-The app automatically deploys to GitHub Pages when you push to the `main` branch.
-
-### Manual Deployment
-Run the deployment script:
-```bash
-./scripts/deploy.sh
-```
-
-For detailed deployment instructions, see [DEPLOYMENT.md](DEPLOYMENT.md).
-
-## 🏗️ Project Structure
+### Layer Structure
 
 ```
-lib/
-├── app/                    # App configuration and main app widget
-├── main.dart              # App entry point
-└── p2p_quote/             # P2P quote feature module
-    ├── cubit/             # State management (Cubit)
-    ├── view/              # UI pages
-    └── widgets/           # Reusable widgets
-
-repositories/              # Local packages
-├── client/               # API client
-├── i18n/                 # Internationalization
-├── ui/                   # UI components and theme
-└── recommendation_repository/  # Business logic
+┌────────────────────────────────────────────────────────────────┐
+│                    Presentation Layer                          │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐ │
+│  │   P2P Quote     │  │   App Widget    │  │   UI Package    │ │
+│  │   Feature       │  │   Configuration │  │   Components    │ │
+│  └─────────────────┘  └─────────────────┘  └─────────────────┘ │
+├────────────────────────────────────────────────────────────────┤
+│                    Business Logic Layer                        │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐ │
+│  │   BloC/Cubit    │  │  Recommendation │  │   State Models  │ │
+│  │  State Mgmt     │  │   Repository    │  │   & Validation  │ │
+│  └─────────────────┘  └─────────────────┘  └─────────────────┘ │
+├────────────────────────────────────────────────────────────────┤
+│                      Data Layer                                │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐ │
+│  │   HTTP Client   │  │   Data Models   │  │   Exceptions    │ │
+│  │   & API Calls   │  │   & Parsing     │  │   & Handling    │ │
+│  └─────────────────┘  └─────────────────┘  └─────────────────┘ │
+└────────────────────────────────────────────────────────────────┘
 ```
 
-## 🧪 Testing
+### Package Organization
 
-Run tests:
-```bash
-flutter test
+The application is organized into **local packages** for maximum modularity:
+
+- **`client/`** - HTTP client, API models, and data layer abstractions
+- **`ui/`** - Reusable UI components, theming, and design system
+- **`i18n/`** - Type-safe internationalization using Slang
+- **`recommendation_repository/`** - Business logic and data transformation
+
+## 🎯 Technical Stack & Dependencies
+
+### Core Dependencies
+
+| Package | Purpose | Technical Decision |
+|---------|---------|-------------------|
+| `flutter_bloc` | State management | **BloC pattern** for predictable state management with business logic separation |
+| `equatable` | Value equality | **Immutable state objects** with efficient comparison for BloC states |
+| `slang` | Internationalization | **Type-safe i18n** with compile-time checks and hot-reload support |
+| `shimmer` | Loading states | **Progressive loading UX** with skeleton screens |
+| `http` | Network layer | **Lightweight HTTP client** with custom error handling |
+| `very_good_analysis` | Code quality | **VGV linting rules** for consistent code style and best practices |
+
+### Architecture Patterns
+
+#### 1. **BloC/Cubit State Management**
+```dart
+class P2PQuoteCubit extends Cubit<P2PQuoteState> {
+  // ✅ Immutable state objects
+  // ✅ Business logic separation
+  // ✅ Debounced API calls (500ms)
+  // ✅ Typed exception handling
+}
 ```
 
-Run code analysis:
-```bash
-flutter analyze
+#### 2. **Repository Pattern**
+```dart
+abstract class RecommendationRepository {
+  Future<Recommendation> getRecommendations({
+    required String fiatCurrencyId,
+    required String cryptoCurrencyId,
+    required ExchangeType exchangeType,
+    required num amount,
+    required String amountCurrencyId,
+  });
+}
 ```
 
-## 🌐 Web Support
+#### 3. **Dependency Injection**
+- **RepositoryProvider** for repository injection
+- **BlocProvider** for state management
+- **Constructor injection** for dependency graph
 
-This app is optimized for web deployment with:
-- Responsive design
-- Progressive Web App (PWA) features
-- Optimized loading states
-- Mobile-friendly interface
+## 🔧 Key Technical Features
 
-## 📱 Features
+### State Management
 
-- P2P cryptocurrency quote interface
-- Multi-language support (Spanish/English)
-- Dark/Light theme switching
-- Responsive design
-- Real-time quote updates
-- Currency conversion
+**P2PQuoteState** with status-based UI rendering:
+- ✅ **Immutable state objects** using `Equatable`
+- ✅ **Status-based UI rendering** (`loading`, `success`, `noData`, `error`)
+- ✅ **Optimistic updates** with rollback
+- ✅ **Debounced user input** for API efficiency
 
-## 🔧 Development
+### Error Handling Strategy
 
-### Local Development
-```bash
-flutter run -d chrome
+**Type-safe error handling** with custom exceptions:
+```dart
+try {
+  final quote = await recommendationRepository.getRecommendations(/*...*/);
+  emit(state.copyWith(status: P2PQuoteStatus.success, recommendation: quote));
+} on NoRecommendationDataFoundException {
+  emit(state.copyWith(status: P2PQuoteStatus.noData));
+} on RecommendationParsingException {
+  emit(state.copyWith(status: P2PQuoteStatus.error));
+}
 ```
 
-### Build for Web
-```bash
-flutter build web --base-href "/coding-interview-frontend/"
-```
+### Performance Optimizations
 
-### Serve Built App Locally
-```bash
-cd build/web
-python -m http.server 8000
-```
+- **Debounced API calls** (500ms delay) to prevent excessive requests
+- **Efficient state updates** using copyWith pattern
+- **Shimmer loading states** for better perceived performance
+- **Lazy loading** of currency data
 
-## 🤝 Contributing
+## 🧪 Testing & Quality Assurance
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Run tests and analysis
-5. Submit a pull request
+### Integration Testing
+- **End-to-end user flows** 
+- **Currency selection testing**
+- **Error handling scenarios**
+- **Theme and localization testing**
 
-## 📄 License
+### Code Quality
+- **Very Good Analysis** linting rules enforced
+- **Full null safety** compliance
+- **Comprehensive error handling**
+- **Type-safe API models**
 
-This project is part of a coding challenge for Eldorado.
+## 📱 Feature Implementation
+
+### Core Features
+- **P2P Quote Interface** with real-time updates
+- **Currency Exchange Direction** switching (OnRamp/OffRamp)
+- **Multi-currency Support** (Fiat ⟷ Crypto)
+- **Responsive Design** optimized for web
+- **Dark/Light Theme** with system preference detection
+- **Spanish/English Localization** with type-safe translations
+
+### UI/UX Highlights
+- **Progressive Loading States** with shimmer effects
+- **Intuitive Currency Selection** with search and filtering
+- **Smooth Animations** and transitions
+- **Mobile-first Responsive Design**
+- **Accessibility Compliant** components
+
+## 🚀 Web Deployment
+
+**Automated GitHub Pages deployment** with:
+- **Build optimization** for web performance
+- **Asset optimization** with caching
+- **Progressive Web App** features
+- **Responsive design** across all devices
+
+## 🔍 Code Quality Metrics
+
+- **Zero analysis issues** with Very Good Analysis
+- **Full null safety** compliance
+- **Comprehensive error handling** with typed exceptions
+- **Clean architecture** with layer separation
+- **Efficient state management** with minimal rebuilds
+
+---

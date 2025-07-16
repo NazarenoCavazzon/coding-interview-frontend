@@ -1,6 +1,6 @@
 # Integration Tests
 
-This directory contains comprehensive integration tests for the Challenge Eldorado P2P Quote application.
+This directory contains focused integration tests for the Challenge Eldorado P2P Quote application.
 
 ## Test Files
 
@@ -14,26 +14,20 @@ Tests basic app initialization and core functionality:
 
 ### 2. `p2p_quote_flow_test.dart`
 Tests the main P2P quote functionality:
-- Amount input and validation
+- Amount input and quote flow
 - Exchange direction switching
-- Currency selection dialogs
+- Decimal number input validation
 - Comma to decimal conversion
-- Zero amount handling
 - Debounced quote requests
-- Quote button visibility
 
 ### 3. `currency_selection_test.dart`
-Tests comprehensive currency selection functionality:
+Tests core currency selection functionality:
 - Bottom sheet display on phone screens
 - Dialog display on tablet screens
-- Fiat currency selection (BRL, COP, PEN, VES)
+- Fiat currency selection (generic test)
 - Crypto currency selection (USDT only)
 - Radio button interactions
-- Currency state updates in cubit
-- Currency images display
-- Multiple currency selections
 - Modal dismissal by tapping outside
-- Responsive behavior across screen sizes
 
 ### 4. `theme_and_localization_test.dart`
 Tests theme switching and localization:
@@ -42,29 +36,21 @@ Tests theme switching and localization:
 - Theme persistence across screen rotations
 - System theme adaptation
 - Theme colors for text and backgrounds
+- Card colors adaptation
 
 ### 5. `error_handling_test.dart`
 Tests error handling and edge cases:
-- Network error handling
-- No data scenarios
-- Parsing errors
 - Empty input handling
-- Large number input
 - Special character filtering
 - Rapid input changes
-- Widget disposal
-- Multiple simultaneous operations
+- Widget disposal scenarios
 
 ### 6. `end_to_end_test.dart`
 Tests complete user workflows:
 - Off-ramp flow (crypto to fiat)
 - On-ramp flow (fiat to crypto)
-- Currency selection workflow
-- Theme and language switching workflow
-- Multiple operations sequence
+- Currency selection and switching workflow
 - Error recovery scenarios
-- Responsive design testing
-- Performance under load
 
 ## Running the Tests
 
@@ -98,9 +84,8 @@ These integration tests cover:
 - ✅ **State Management**: BLoC state changes and persistence
 - ✅ **Theme System**: Dark/light mode switching
 - ✅ **Localization**: Language switching functionality
-- ✅ **Error Handling**: Network errors, parsing errors, validation
+- ✅ **Error Handling**: Input validation and edge cases
 - ✅ **Responsive Design**: Multiple screen sizes and orientations
-- ✅ **Performance**: Load testing and timing constraints
 - ✅ **User Workflows**: Complete end-to-end user scenarios
 
 ## Test Structure
@@ -121,7 +106,7 @@ These tests follow Flutter testing best practices:
 - Use proper finders for UI elements
 - Test responsive design across screen sizes
 - Verify state management behavior
-- Test accessibility and user experience
+- Focus on core functionality without redundancy
 
 ## Dependencies
 
@@ -135,4 +120,5 @@ The integration tests require:
 - Tests are designed to run on both emulators and physical devices
 - Some tests may require network connectivity for API calls
 - Tests use staging API client for realistic scenarios
-- All tests are designed to be deterministic and repeatable 
+- All tests are designed to be deterministic and repeatable
+- Test suite has been optimized for maintainability and reduced redundancy 

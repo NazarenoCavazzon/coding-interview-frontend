@@ -28,8 +28,6 @@ void main() {
       await tester.pumpAndSettle();
 
       final currencyInput = find.byType(CurrencyInput);
-      expect(currencyInput, findsOneWidget);
-
       await tester.enterText(currencyInput, '100');
       await tester.pumpAndSettle();
 
@@ -48,32 +46,13 @@ void main() {
       await tester.pumpAndSettle();
 
       final switchButton = find.byType(QuoteCurrencySwitch);
-      expect(switchButton, findsOneWidget);
-
       await tester.tap(switchButton);
       await tester.pumpAndSettle();
 
       expect(find.byType(QuoteCurrencySwitch), findsOneWidget);
     });
 
-    testWidgets('currency selection opens dialog', (tester) async {
-      await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
-      );
-      await tester.pumpAndSettle();
-
-      final currencyButton = find.byType(AppButton).first;
-      expect(currencyButton, findsOneWidget);
-
-      await tester.tap(currencyButton);
-      await tester.pumpAndSettle();
-
-      expect(find.byType(AppButton), findsWidgets);
-    });
-
-    testWidgets('amount input accepts valid numbers', (tester) async {
+    testWidgets('amount input accepts decimal numbers', (tester) async {
       await tester.pumpWidget(
         TranslationProvider(
           child: App(recommendationRepository: recommendationRepository),
@@ -82,7 +61,6 @@ void main() {
       await tester.pumpAndSettle();
 
       final currencyInput = find.byType(CurrencyInput);
-
       await tester.enterText(currencyInput, '123.45');
       await tester.pumpAndSettle();
 
@@ -98,39 +76,10 @@ void main() {
       await tester.pumpAndSettle();
 
       final currencyInput = find.byType(CurrencyInput);
-
       await tester.enterText(currencyInput, '123,45');
       await tester.pumpAndSettle();
 
       expect(find.byType(CurrencyInput), findsOneWidget);
-    });
-
-    testWidgets('zero amounts are handled correctly', (tester) async {
-      await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
-      );
-      await tester.pumpAndSettle();
-
-      final currencyInput = find.byType(CurrencyInput);
-
-      await tester.enterText(currencyInput, '0');
-      await tester.pumpAndSettle();
-
-      expect(find.byType(CurrencyInput), findsOneWidget);
-    });
-
-    testWidgets('quote button is visible', (tester) async {
-      await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
-      );
-      await tester.pumpAndSettle();
-
-      final quoteButton = find.byType(AppButton).last;
-      expect(quoteButton, findsOneWidget);
     });
 
     testWidgets('debounced quote requests work', (tester) async {

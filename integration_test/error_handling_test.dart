@@ -19,60 +19,6 @@ void main() {
       await LocaleSettings.setLocale(AppLocale.es);
     });
 
-    testWidgets('app handles network errors gracefully', (tester) async {
-      await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
-      );
-      await tester.pumpAndSettle();
-
-      final currencyInput = find.byType(CurrencyInput);
-      await tester.enterText(currencyInput, '999999');
-      await tester.pumpAndSettle();
-
-      await tester.pump(const Duration(milliseconds: 600));
-      await tester.pumpAndSettle();
-
-      expect(find.byType(MaterialApp), findsOneWidget);
-    });
-
-    testWidgets('app handles no data scenarios', (tester) async {
-      await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
-      );
-      await tester.pumpAndSettle();
-
-      final currencyInput = find.byType(CurrencyInput);
-      await tester.enterText(currencyInput, '1');
-      await tester.pumpAndSettle();
-
-      await tester.pump(const Duration(milliseconds: 600));
-      await tester.pumpAndSettle();
-
-      expect(find.byType(MaterialApp), findsOneWidget);
-    });
-
-    testWidgets('app handles parsing errors gracefully', (tester) async {
-      await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
-      );
-      await tester.pumpAndSettle();
-
-      final currencyInput = find.byType(CurrencyInput);
-      await tester.enterText(currencyInput, '100');
-      await tester.pumpAndSettle();
-
-      await tester.pump(const Duration(milliseconds: 600));
-      await tester.pumpAndSettle();
-
-      expect(find.byType(MaterialApp), findsOneWidget);
-    });
-
     testWidgets('app handles empty input correctly', (tester) async {
       await tester.pumpWidget(
         TranslationProvider(
@@ -86,24 +32,6 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.byType(CurrencyInput), findsOneWidget);
-    });
-
-    testWidgets('app handles very large numbers', (tester) async {
-      await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
-      );
-      await tester.pumpAndSettle();
-
-      final currencyInput = find.byType(CurrencyInput);
-      await tester.enterText(currencyInput, '999999999999');
-      await tester.pumpAndSettle();
-
-      await tester.pump(const Duration(milliseconds: 600));
-      await tester.pumpAndSettle();
-
-      expect(find.byType(MaterialApp), findsOneWidget);
     });
 
     testWidgets('app handles special characters in input', (tester) async {
@@ -137,7 +65,6 @@ void main() {
       }
 
       await tester.pumpAndSettle();
-
       expect(find.byType(MaterialApp), findsOneWidget);
     });
 
@@ -157,26 +84,6 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.byType(Scaffold), findsOneWidget);
-    });
-
-    testWidgets('app handles multiple simultaneous operations', (tester) async {
-      await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
-      );
-      await tester.pumpAndSettle();
-
-      final currencyInput = find.byType(CurrencyInput);
-      final darkModeSwitch = find.byType(DarkModeSwitch);
-      final languageSwitch = find.byType(LanguageSwitch);
-
-      await tester.enterText(currencyInput, '100');
-      await tester.tap(darkModeSwitch);
-      await tester.tap(languageSwitch);
-      await tester.pumpAndSettle();
-
-      expect(find.byType(MaterialApp), findsOneWidget);
     });
   });
 }

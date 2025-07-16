@@ -1,5 +1,3 @@
-import 'package:decimal/decimal.dart';
-
 /// Base class for the client.
 abstract class HttpClientBase {
   /// Gets the recommendations for a given exchange type, crypto currency, fiat
@@ -8,7 +6,7 @@ abstract class HttpClientBase {
     required int exchangeType,
     required String cryptoCurrencyId,
     required String fiatCurrencyId,
-    required Decimal amount,
+    required num amount,
     required String amountCurrencyId,
   });
 

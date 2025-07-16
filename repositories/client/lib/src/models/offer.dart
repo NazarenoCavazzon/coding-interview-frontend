@@ -1,7 +1,7 @@
+import 'package:client/src/models/limits.dart';
+import 'package:client/src/models/offer_maker_stats.dart';
+import 'package:client/src/models/user.dart';
 import 'package:equatable/equatable.dart';
-import 'package:recommendation_repository/src/models/limits.dart';
-import 'package:recommendation_repository/src/models/offer_maker_stats.dart';
-import 'package:recommendation_repository/src/models/user.dart';
 
 /// Offer model.
 class Offer extends Equatable {

@@ -1,0 +1,23 @@
+{
+  "common": {
+    "error": "Error",
+    "exchange": "Cambiar",
+    "have": "Tengo",
+    "want": "Quiero"
+  },
+  "currency": {
+    "description(map)": {
+      "BRL": "Real (R\\$)",
+      "COP": "Peso colombiano (COL\\$)",
+      "PEN": "Soles Peruanos (S/)",
+      "USDT": "Tether (USDT)",
+      "VES": "Bolívares (Bs)"
+    }
+  },
+  "quote": {
+    "estimated_rate": "Tasa estimada",
+    "estimated_time": "Tiempo estimado",
+    "no_quote": "Sin cotización",
+    "you_will_receive": "Recibirás"
+  }
+}

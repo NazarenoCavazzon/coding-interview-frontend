@@ -1,5 +1,5 @@
+import 'package:client/client.dart';
 import 'package:equatable/equatable.dart';
-import 'package:recommendation_repository/src/models/offer.dart';
 
 /// Recommendation data model.
 class Recommendation extends Equatable {

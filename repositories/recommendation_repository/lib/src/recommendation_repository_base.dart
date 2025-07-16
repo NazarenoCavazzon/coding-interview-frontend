@@ -1,6 +1,4 @@
 import 'package:client/client.dart';
-import 'package:decimal/decimal.dart';
-import 'package:recommendation_repository/src/models/models.dart';
 
 /// Base class for the recommendation repository.
 abstract class RecommendationRepositoryBase {
@@ -10,7 +8,7 @@ abstract class RecommendationRepositoryBase {
     required ExchangeType exchangeType,
     required String cryptoCurrencyId,
     required String fiatCurrencyId,
-    required Decimal amount,
+    required num amount,
     required String amountCurrencyId,
   });
 }
@@ -28,7 +26,7 @@ class RecommendationRepository implements RecommendationRepositoryBase {
     required ExchangeType exchangeType,
     required String cryptoCurrencyId,
     required String fiatCurrencyId,
-    required Decimal amount,
+    required num amount,
     required String amountCurrencyId,
   }) async {
     final json = await client.getRecommendations(

@@ -1,42 +1,126 @@
-# Bienvenido al coding-interview-frontend
+# Challenge Eldorado - P2P Quote Application
 
-## Descripción
-Acá tienes todos los assets que necesitas para llevar a cabo una pequeña prueba técnica. El objetivo es que puedas demostrar tus habilidades de programación y de UI. El proyecto consiste de una pequeña calculadora que te muestra cuanto vas a recibir si quieres cambiar una determinada cantidad de una moneda a otra.
+A Flutter web application for P2P cryptocurrency quotes, built as part of the Eldorado coding challenge.
 
-## Características
-1. Hay dos tipos de monedas: "FIAT" y "CRYPTO".
-2. La tasa de cambio la podrás obtener de nuestro API público.
-3. La moneda del input 
+## 🚀 Live Demo
 
-## API
-- URL: https://74j6q7lg6a.execute-api.eu-west-1.amazonaws.com/stage/orderbook/public/recommendations
-- Query Params:
-  - `type`: 0 -> Cambio de CRYPTO a FIAT, 1 -> Cambio de FIAT a CRYPTO
-  - `cryptoCurrencyId`: La moneda crypto (el ID está en el nombre del asset)
-  - `fiatCurrencyId`: La moneda fiat (el ID está en el nombre del asset)
-  - `amount`: Cantidad a cambiar
-  - `amountCurrencyId`: La moneda en la que está del input
+The app is automatically deployed to GitHub Pages: [View Live Demo](https://[your-username].github.io/coding-interview-frontend/)
 
-Del response, simplemente obtener el `data.byPrice.fiatToCryptoExchangeRate` y multiplicarlo/dividirlo para mostrar toda la data necesaria.
+## 🛠️ Quick Start
 
-### Que puedes hacer: 
-- ✅ Preferiblemente, usa Flutter :)
-- ✅ Cuantas mejoras de UX como veas necesarias/quieras
-- ✅ No todo tiene que estar funcionando a la perfección, lo que más vamos a tomar en cuenta es el parecido con el diseño y la calidad del código.
-- ✅ Desarrolla la app con la arquitecura de una app que va a escalar, no hagas un código que no puedas mantener en el futuro.
+### Prerequisites
+- Flutter SDK (3.8.1 or higher)
+- Dart SDK
+- Git
 
+### Installation
 
-### Que **no** puedes hacer:
-- ❌ Estresarte 🤗
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/[your-username]/coding-interview-frontend.git
+   cd coding-interview-frontend
+   ```
 
+2. Install dependencies:
+   ```bash
+   flutter pub get
+   cd repositories/client && flutter pub get && cd ../..
+   cd repositories/i18n && flutter pub get && cd ../..
+   cd repositories/ui && flutter pub get && cd ../..
+   cd repositories/recommendation_repository && flutter pub get && cd ../..
+   ```
 
-## Pasos para comenzar
-1. Haz un fork usando este repositorio como template
-2. Clona el repositorio en tu máquina
-3. Desarrolla la mini-app
-4. Sube tus cambios a tu repositorio
-5. Avísanos que has terminado
-6. ???
-7. PROFIT
+3. Run the application:
+   ```bash
+   flutter run -d chrome
+   ```
 
-### Cualquier duda contactarme a https://www.linkedin.com/in/carlosfontest/
+## 🚀 Deployment
+
+### Automatic Deployment
+The app automatically deploys to GitHub Pages when you push to the `main` branch.
+
+### Manual Deployment
+Run the deployment script:
+```bash
+./scripts/deploy.sh
+```
+
+For detailed deployment instructions, see [DEPLOYMENT.md](DEPLOYMENT.md).
+
+## 🏗️ Project Structure
+
+```
+lib/
+├── app/                    # App configuration and main app widget
+├── main.dart              # App entry point
+└── p2p_quote/             # P2P quote feature module
+    ├── cubit/             # State management (Cubit)
+    ├── view/              # UI pages
+    └── widgets/           # Reusable widgets
+
+repositories/              # Local packages
+├── client/               # API client
+├── i18n/                 # Internationalization
+├── ui/                   # UI components and theme
+└── recommendation_repository/  # Business logic
+```
+
+## 🧪 Testing
+
+Run tests:
+```bash
+flutter test
+```
+
+Run code analysis:
+```bash
+flutter analyze
+```
+
+## 🌐 Web Support
+
+This app is optimized for web deployment with:
+- Responsive design
+- Progressive Web App (PWA) features
+- Optimized loading states
+- Mobile-friendly interface
+
+## 📱 Features
+
+- P2P cryptocurrency quote interface
+- Multi-language support (Spanish/English)
+- Dark/Light theme switching
+- Responsive design
+- Real-time quote updates
+- Currency conversion
+
+## 🔧 Development
+
+### Local Development
+```bash
+flutter run -d chrome
+```
+
+### Build for Web
+```bash
+flutter build web --base-href "/coding-interview-frontend/"
+```
+
+### Serve Built App Locally
+```bash
+cd build/web
+python -m http.server 8000
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run tests and analysis
+5. Submit a pull request
+
+## 📄 License
+
+This project is part of a coding challenge for Eldorado.

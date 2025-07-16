@@ -1,0 +1,23 @@
+{
+  "common": {
+    "error": "Error",
+    "exchange": "Exchange",
+    "have": "I have",
+    "want": "I want"
+  },
+  "currency": {
+    "description(map)": {
+      "BRL": "Real (R\\$)",
+      "COP": "Colombian Peso (COL\\$)",
+      "PEN": "Peruvian Soles (S/)",
+      "USDT": "Tether (USDT)",
+      "VES": "Bolívares (Bs)"
+    }
+  },
+  "quote": {
+    "estimated_rate": "Estimated rate",
+    "estimated_time": "Estimated time",
+    "no_quote": "No quote",
+    "you_will_receive": "You will receive"
+  }
+} 

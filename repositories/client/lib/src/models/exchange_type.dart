@@ -1,9 +1,9 @@
 /// Exchange type model.
 enum ExchangeType {
-  /// On ramp.
+  /// Off ramp.
   offRamp(0),
 
-  /// Off ramp.
+  /// On ramp.
   onRamp(1);
 
   const ExchangeType(this.value);

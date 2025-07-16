@@ -1,7 +1,6 @@
 // ignore_for_file: lines_longer_than_80_chars
 
 import 'package:client/client.dart';
-import 'package:decimal/decimal.dart';
 import 'package:recommendation_repository/recommendation_repository.dart';
 import 'package:test/test.dart';
 
@@ -13,7 +12,7 @@ class MockClient implements HttpClientBase {
     int exchangeType,
     String cryptoCurrencyId,
     String fiatCurrencyId,
-    Decimal amount,
+    num amount,
     String amountCurrencyId,
   )
   _handler;
@@ -23,7 +22,7 @@ class MockClient implements HttpClientBase {
     required int exchangeType,
     required String cryptoCurrencyId,
     required String fiatCurrencyId,
-    required Decimal amount,
+    required num amount,
     required String amountCurrencyId,
   }) async {
     return _handler(
@@ -53,7 +52,7 @@ void main() {
       late int capturedExchangeType;
       late String capturedCryptoCurrencyId;
       late String capturedFiatCurrencyId;
-      late Decimal capturedAmount;
+      late num capturedAmount;
       late String capturedAmountCurrencyId;
 
       mockClient = MockClient((
@@ -76,14 +75,14 @@ void main() {
         exchangeType: ExchangeType.offRamp,
         cryptoCurrencyId: 'TATUM-TRON-USDT',
         fiatCurrencyId: 'COP',
-        amount: Decimal.fromInt(100),
+        amount: 100,
         amountCurrencyId: 'TATUM-TRON-USDT',
       );
 
       expect(capturedExchangeType, equals(0));
       expect(capturedCryptoCurrencyId, equals('TATUM-TRON-USDT'));
       expect(capturedFiatCurrencyId, equals('COP'));
-      expect(capturedAmount, equals(Decimal.fromInt(100)));
+      expect(capturedAmount, equals(100));
       expect(capturedAmountCurrencyId, equals('TATUM-TRON-USDT'));
     });
 
@@ -95,7 +94,7 @@ void main() {
         exchangeType: ExchangeType.offRamp,
         cryptoCurrencyId: 'TATUM-TRON-USDT',
         fiatCurrencyId: 'COP',
-        amount: Decimal.fromInt(100),
+        amount: 100,
         amountCurrencyId: 'TATUM-TRON-USDT',
       );
 
@@ -126,7 +125,7 @@ void main() {
         exchangeType: ExchangeType.onRamp,
         cryptoCurrencyId: 'TATUM-TRON-USDT',
         fiatCurrencyId: 'COP',
-        amount: Decimal.fromInt(100),
+        amount: 100,
         amountCurrencyId: 'COP',
       );
 
@@ -146,7 +145,7 @@ void main() {
             exchangeType: ExchangeType.offRamp,
             cryptoCurrencyId: 'TATUM-TRON-USDT',
             fiatCurrencyId: 'COP',
-            amount: Decimal.fromInt(100),
+            amount: 100,
             amountCurrencyId: 'TATUM-TRON-USDT',
           ),
           throwsA(isA<NoRecommendationDataFoundException>()),
@@ -167,7 +166,7 @@ void main() {
             exchangeType: ExchangeType.offRamp,
             cryptoCurrencyId: 'TATUM-TRON-USDT',
             fiatCurrencyId: 'COP',
-            amount: Decimal.fromInt(100),
+            amount: 100,
             amountCurrencyId: 'TATUM-TRON-USDT',
           ),
           throwsA(isA<NoRecommendationDataFoundException>()),
@@ -188,7 +187,7 @@ void main() {
             exchangeType: ExchangeType.offRamp,
             cryptoCurrencyId: 'TATUM-TRON-USDT',
             fiatCurrencyId: 'COP',
-            amount: Decimal.fromInt(100),
+            amount: 100,
             amountCurrencyId: 'TATUM-TRON-USDT',
           ),
           throwsA(isA<NoRecommendationDataFoundException>()),
@@ -238,7 +237,7 @@ void main() {
         exchangeType: ExchangeType.offRamp,
         cryptoCurrencyId: 'TATUM-TRON-USDT',
         fiatCurrencyId: 'COP',
-        amount: Decimal.fromInt(100),
+        amount: 100,
         amountCurrencyId: 'TATUM-TRON-USDT',
       );
 
@@ -267,7 +266,7 @@ void main() {
             exchangeType: ExchangeType.offRamp,
             cryptoCurrencyId: 'TATUM-TRON-USDT',
             fiatCurrencyId: 'COP',
-            amount: Decimal.fromInt(100),
+            amount: 100,
             amountCurrencyId: 'TATUM-TRON-USDT',
           ),
           throwsA(isA<RecommendationParsingException>()),
@@ -288,7 +287,7 @@ void main() {
             exchangeType: ExchangeType.offRamp,
             cryptoCurrencyId: 'TATUM-TRON-USDT',
             fiatCurrencyId: 'COP',
-            amount: Decimal.fromInt(100),
+            amount: 100,
             amountCurrencyId: 'TATUM-TRON-USDT',
           ),
           throwsA(isA<NoRecommendationDataFoundException>()),
@@ -331,7 +330,7 @@ void main() {
             exchangeType: ExchangeType.offRamp,
             cryptoCurrencyId: 'TATUM-TRON-USDT',
             fiatCurrencyId: 'COP',
-            amount: Decimal.fromInt(100),
+            amount: 100,
             amountCurrencyId: 'TATUM-TRON-USDT',
           ),
           throwsA(isA<RecommendationParsingException>()),

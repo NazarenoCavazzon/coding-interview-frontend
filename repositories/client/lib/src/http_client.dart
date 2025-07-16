@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:client/src/http_client_base.dart';
-import 'package:decimal/decimal.dart';
 import 'package:http/http.dart' as http;
 
 const _stageBaseUrl =
@@ -45,7 +44,7 @@ class ElDoradoApiClient implements HttpClientBase {
     required int exchangeType,
     required String cryptoCurrencyId,
     required String fiatCurrencyId,
-    required Decimal amount,
+    required num amount,
     required String amountCurrencyId,
   }) async {
     return _get('/orderbook/public/recommendations', {

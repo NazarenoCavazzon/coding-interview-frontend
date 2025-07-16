@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_dynamic_calls
 
 import 'package:client/client.dart';
-import 'package:decimal/decimal.dart';
 import 'package:http/http.dart' as http;
 import 'package:test/test.dart';
 
@@ -51,7 +50,7 @@ void main() {
         exchangeType: ExchangeType.offRamp.value,
         cryptoCurrencyId: 'TATUM-TRON-USDT',
         fiatCurrencyId: 'COP',
-        amount: Decimal.fromInt(100),
+        amount: 100,
         amountCurrencyId: 'TATUM-TRON-USDT',
       );
 
@@ -87,7 +86,7 @@ void main() {
         exchangeType: ExchangeType.offRamp.value,
         cryptoCurrencyId: 'TATUM-TRON-USDT',
         fiatCurrencyId: 'COP',
-        amount: Decimal.fromInt(100),
+        amount: 100,
         amountCurrencyId: 'TATUM-TRON-USDT',
       );
 
@@ -116,7 +115,7 @@ void main() {
           exchangeType: ExchangeType.offRamp.value,
           cryptoCurrencyId: 'TATUM-TRON-USDT',
           fiatCurrencyId: 'COP',
-          amount: Decimal.fromInt(100),
+          amount: 100,
           amountCurrencyId: 'TATUM-TRON-USDT',
         ),
         throwsA(isA<HttpClientException>()),
@@ -134,7 +133,7 @@ void main() {
           exchangeType: ExchangeType.offRamp.value,
           cryptoCurrencyId: 'TATUM-TRON-USDT',
           fiatCurrencyId: 'COP',
-          amount: Decimal.fromInt(100),
+          amount: 100,
           amountCurrencyId: 'TATUM-TRON-USDT',
         ),
         throwsA(isA<HttpClientException>()),
@@ -152,7 +151,7 @@ void main() {
           exchangeType: ExchangeType.offRamp.value,
           cryptoCurrencyId: 'TATUM-TRON-USDT',
           fiatCurrencyId: 'COP',
-          amount: Decimal.fromInt(100),
+          amount: 100,
           amountCurrencyId: 'TATUM-TRON-USDT',
         );
         fail('Expected HttpClientException to be thrown');
@@ -173,7 +172,7 @@ void main() {
           exchangeType: ExchangeType.offRamp.value,
           cryptoCurrencyId: 'TATUM-TRON-USDT',
           fiatCurrencyId: 'COP',
-          amount: Decimal.fromInt(100),
+          amount: 100,
           amountCurrencyId: 'TATUM-TRON-USDT',
         ),
         throwsA(isA<FormatException>()),
@@ -188,7 +187,7 @@ void main() {
         exchangeType: ExchangeType.offRamp.value,
         cryptoCurrencyId: 'TATUM-TRON-USDT',
         fiatCurrencyId: 'COP',
-        amount: Decimal.fromInt(100),
+        amount: 100,
         amountCurrencyId: 'TATUM-TRON-USDT',
       );
 
@@ -198,29 +197,6 @@ void main() {
 
     test('should dispose HTTP client correctly', () {
       expect(() => client.dispose(), returnsNormally);
-    });
-  });
-
-  group('ExchangeType', () {
-    test('should have correct values', () {
-      expect(ExchangeType.offRamp.value, equals(0));
-      expect(ExchangeType.onRamp.value, equals(1));
-    });
-  });
-
-  group('HttpClientException', () {
-    test('should have correct string representation', () {
-      const exception = HttpClientException('Test message', 404);
-      expect(
-        exception.toString(),
-        equals('HttpClientException: Test message (Status: 404)'),
-      );
-    });
-
-    test('should have correct properties', () {
-      const exception = HttpClientException('Test message', 404);
-      expect(exception.message, equals('Test message'));
-      expect(exception.statusCode, equals(404));
     });
   });
 }

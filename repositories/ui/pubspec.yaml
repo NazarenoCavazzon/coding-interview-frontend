@@ -7,11 +7,11 @@ environment:
   sdk: ^3.8.1
 
 dependencies:
-  animated_theme_switcher: ^2.0.10
   client:
     path: ../client
   flutter:
     sdk: flutter
+  flutter_bloc: ^9.1.1
   i18n:
     path: ../i18n
 

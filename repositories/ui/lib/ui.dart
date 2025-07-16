@@ -5,4 +5,5 @@ library;
 
 export 'src/helpers/helpers.dart';
 export 'src/theme/app_theme.dart';
+export 'src/theme/theme_cubit.dart';
 export 'src/widgets/widgets.dart';

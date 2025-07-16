@@ -30,6 +30,12 @@ jobs:
         cd ../ui && flutter pub get
         cd ../recommendation_repository && flutter pub get
 
+    - name: Test local packages
+      run: |
+        cd repositories/client && flutter test
+        cd ../recommendation_repository && flutter test
+        cd ../ui && flutter test
+
     - name: Analyze code
       run: flutter analyze
 

@@ -1,7 +1,7 @@
-/// A client for the challenge Eldorado.
+/// A client for the challenge El Dorado.
 library client;
 
-export 'src/http_client.dart';
-export 'src/http_client_base.dart';
-export 'src/http_client_exceptions.dart';
+export 'src/el_dorado_api_client.dart';
+export 'src/el_dorado_api_client_base.dart';
+export 'src/el_dorado_api_client_exceptions.dart';
 export 'src/models/models.dart';

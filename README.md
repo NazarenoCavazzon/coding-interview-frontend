@@ -1,4 +1,4 @@
-# Challenge Eldorado - P2P Quote Application
+# Challenge El Dorado - P2P Quote Application
 
 A Flutter web application implementing a P2P cryptocurrency quote interface, built using Very Good Ventures' layered architecture and modern Flutter best practices.
 

@@ -1,7 +1,9 @@
 analyzer:
   errors:
     deprecated_member_use: ignore
-include: package:very_good_analysis/analysis_options.6.0.0.yaml
+    avoid_catches_without_on_clauses: ignore
+    document_ignores: ignore
+include: package:very_good_analysis/analysis_options.9.0.0.yaml
 linter:
   rules:
     public_member_api_docs: false

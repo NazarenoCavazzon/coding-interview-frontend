@@ -36,8 +36,8 @@ class QuoteInfoSection extends StatelessWidget {
               ? (amount * num.parse(exchangeRate)).toStringAsFixed(2)
               : (amount / num.parse(exchangeRate)).toStringAsFixed(2);
           releaseTimeString = releaseTime < 1.0
-              ? '> 1 Min'
-              : '${releaseTime.floor()} min';
+              ? '> 1'
+              : releaseTime.floor().toString();
         } else if (state.isNoData) {
           exchangeRate = t.quote.no_quote;
           totalAmount = t.quote.no_quote;

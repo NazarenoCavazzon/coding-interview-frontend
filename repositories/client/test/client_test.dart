@@ -118,7 +118,7 @@ void main() {
           amount: 100,
           amountCurrencyId: 'TATUM-TRON-USDT',
         ),
-        throwsA(isA<HttpClientException>()),
+        throwsA(isA<ElDoradoApiClientException>()),
       );
     });
 
@@ -136,7 +136,7 @@ void main() {
           amount: 100,
           amountCurrencyId: 'TATUM-TRON-USDT',
         ),
-        throwsA(isA<HttpClientException>()),
+        throwsA(isA<ElDoradoApiClientException>()),
       );
     });
 
@@ -155,7 +155,7 @@ void main() {
           amountCurrencyId: 'TATUM-TRON-USDT',
         );
         fail('Expected HttpClientException to be thrown');
-      } on HttpClientException catch (e) {
+      } on ElDoradoApiClientException catch (e) {
         expect(e.statusCode, equals(401));
         expect(e.message, equals('HTTP request failed'));
       }

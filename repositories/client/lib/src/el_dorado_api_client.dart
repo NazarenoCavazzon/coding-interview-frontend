@@ -1,14 +1,14 @@
 import 'dart:convert';
 
-import 'package:client/src/http_client_base.dart';
-import 'package:client/src/http_client_exceptions.dart';
+import 'package:client/src/el_dorado_api_client_base.dart';
+import 'package:client/src/el_dorado_api_client_exceptions.dart';
 import 'package:http/http.dart' as http;
 
 const _stageBaseUrl =
     'https://74j6q7lg6a.execute-api.eu-west-1.amazonaws.com/stage';
 
 /// HTTP client for the El Dorado API.
-class ElDoradoApiClient implements HttpClientBase {
+class ElDoradoApiClient implements ElDoradoApiClientBase {
   /// Creates a new [ElDoradoApiClient] instance.
   ElDoradoApiClient._({required String baseUrl, http.Client? httpClient})
     : _httpClient = httpClient ?? http.Client(),
@@ -36,7 +36,10 @@ class ElDoradoApiClient implements HttpClientBase {
       final json = jsonDecode(response.body) as Map<String, dynamic>;
       return json;
     } else {
-      throw HttpClientException('HTTP request failed', response.statusCode);
+      throw ElDoradoApiClientException(
+        'HTTP request failed',
+        response.statusCode,
+      );
     }
   }
 

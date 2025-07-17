@@ -18,10 +18,9 @@ class P2PQuotePage extends StatelessWidget {
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () => FocusScope.of(context).unfocus(),
-        child: Scaffold(
+        child: const Scaffold(
           resizeToAvoidBottomInset: false,
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          body: const Stack(
+          body: Stack(
             alignment: Alignment.center,
             children: [
               Background(),

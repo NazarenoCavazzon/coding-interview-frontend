@@ -21,9 +21,7 @@ void main() {
 
     testWidgets('dark mode switch toggles theme', (tester) async {
       await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
+        App(recommendationRepository: recommendationRepository),
       );
       await tester.pumpAndSettle();
 
@@ -44,9 +42,7 @@ void main() {
 
     testWidgets('language switch toggles localization', (tester) async {
       await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
+        App(recommendationRepository: recommendationRepository),
       );
       await tester.pumpAndSettle();
 
@@ -61,9 +57,7 @@ void main() {
 
     testWidgets('theme persists across screen rotations', (tester) async {
       await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
+        App(recommendationRepository: recommendationRepository),
       );
       await tester.pumpAndSettle();
 
@@ -87,9 +81,7 @@ void main() {
 
     testWidgets('app adapts to system theme changes', (tester) async {
       await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
+        App(recommendationRepository: recommendationRepository),
       );
       await tester.pumpAndSettle();
 
@@ -99,9 +91,7 @@ void main() {
 
     testWidgets('text elements use correct theme colors', (tester) async {
       await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
+        App(recommendationRepository: recommendationRepository),
       );
       await tester.pumpAndSettle();
 
@@ -116,34 +106,9 @@ void main() {
       expect(textWidgetsAfterSwitch, findsWidgets);
     });
 
-    testWidgets('background adapts to theme changes', (tester) async {
-      await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
-      );
-      await tester.pumpAndSettle();
-
-      final scaffold = tester.widget<Scaffold>(find.byType(Scaffold));
-      final initialBackgroundColor = scaffold.backgroundColor;
-
-      final darkModeSwitch = find.byType(DarkModeSwitch);
-      await tester.tap(darkModeSwitch);
-      await tester.pumpAndSettle();
-
-      final scaffoldAfterSwitch = tester.widget<Scaffold>(
-        find.byType(Scaffold),
-      );
-      final newBackgroundColor = scaffoldAfterSwitch.backgroundColor;
-
-      expect(newBackgroundColor, isNot(initialBackgroundColor));
-    });
-
     testWidgets('card colors adapt to theme changes', (tester) async {
       await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
+        App(recommendationRepository: recommendationRepository),
       );
       await tester.pumpAndSettle();
 

@@ -1,6 +1,6 @@
 # Integration Tests
 
-This directory contains focused integration tests for the Challenge Eldorado P2P Quote application.
+This directory contains focused integration tests for the Challenge El Dorado P2P Quote application.
 
 ## Test Files
 

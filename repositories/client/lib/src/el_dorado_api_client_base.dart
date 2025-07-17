@@ -1,5 +1,5 @@
 /// Base class for the client.
-abstract class HttpClientBase {
+abstract class ElDoradoApiClientBase {
   /// Gets the recommendations for a given exchange type, crypto currency, fiat
   /// currency, amount, and amount currency.
   Future<Map<String, dynamic>> getRecommendations({

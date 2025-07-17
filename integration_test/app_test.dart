@@ -22,9 +22,7 @@ void main() {
 
     testWidgets('app initializes and renders main components', (tester) async {
       await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
+        App(recommendationRepository: recommendationRepository),
       );
       await tester.pumpAndSettle();
 
@@ -39,9 +37,7 @@ void main() {
     ) async {
       await tester.binding.setSurfaceSize(const Size(375, 667));
       await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
+        App(recommendationRepository: recommendationRepository),
       );
       await tester.pumpAndSettle();
 
@@ -60,9 +56,7 @@ void main() {
 
     testWidgets('tap outside input dismisses keyboard', (tester) async {
       await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
+        App(recommendationRepository: recommendationRepository),
       );
       await tester.pumpAndSettle();
 
@@ -80,9 +74,7 @@ void main() {
 
     testWidgets('app preserves state during widget rebuilds', (tester) async {
       await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
+        App(recommendationRepository: recommendationRepository),
       );
       await tester.pumpAndSettle();
 
@@ -91,9 +83,7 @@ void main() {
       await tester.pumpAndSettle();
 
       await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
+        App(recommendationRepository: recommendationRepository),
       );
       await tester.pumpAndSettle();
 

@@ -21,9 +21,7 @@ void main() {
 
     testWidgets('complete user workflow: off-ramp flow', (tester) async {
       await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
+        App(recommendationRepository: recommendationRepository),
       );
       await tester.pumpAndSettle();
 
@@ -39,9 +37,7 @@ void main() {
 
     testWidgets('complete user workflow: on-ramp flow', (tester) async {
       await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
+        App(recommendationRepository: recommendationRepository),
       );
       await tester.pumpAndSettle();
 
@@ -63,9 +59,7 @@ void main() {
       tester,
     ) async {
       await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
+        App(recommendationRepository: recommendationRepository),
       );
       await tester.pumpAndSettle();
 
@@ -88,9 +82,7 @@ void main() {
 
     testWidgets('complete user workflow: error recovery', (tester) async {
       await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
+        App(recommendationRepository: recommendationRepository),
       );
       await tester.pumpAndSettle();
 

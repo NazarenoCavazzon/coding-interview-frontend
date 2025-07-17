@@ -1,6 +1,6 @@
 # Deployment Guide
 
-This document explains how to deploy the Challenge Eldorado Flutter app to GitHub Pages.
+This document explains how to deploy the Challenge El Dorado Flutter app to GitHub Pages.
 
 ## 🚀 Automatic Deployment (Recommended)
 

@@ -6,14 +6,17 @@ import 'package:flutter/material.dart';
 /// Returns true when the current window should be treated as a phone‑sized
 /// surface.  Works for native and web.
 bool isPhone(BuildContext context) {
-  final width = MediaQuery.sizeOf(context).width; // Flutter 3.22+
-  const phoneBreakpoint = 600.0; // Material 3 guideline
+  final size = MediaQuery.sizeOf(context);
+  final shortestSide = size.shortestSide;
+  const phoneBreakpoint = 600.0; // Material 3 guideline
 
-  // For native Android/iOS we still guard against tablets >600 px.
+  // For native Android/iOS, use the shortest side to handle orientation changes
+  // and consider devices with shortestSide < 600 as phones (handles large
+  // phones like S23 Ultra)
   if (!kIsWeb && (Platform.isAndroid || Platform.isIOS)) {
-    return width < phoneBreakpoint;
+    return shortestSide < phoneBreakpoint;
   }
 
-  // For web/desktop just use the width.
-  return width < phoneBreakpoint;
+  // For web/desktop, use the current width for responsive behavior
+  return size.width < phoneBreakpoint;
 }

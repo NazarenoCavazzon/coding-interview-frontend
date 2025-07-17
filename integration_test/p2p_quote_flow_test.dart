@@ -21,9 +21,7 @@ void main() {
 
     testWidgets('complete quote flow - enter amount', (tester) async {
       await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
+        App(recommendationRepository: recommendationRepository),
       );
       await tester.pumpAndSettle();
 
@@ -39,9 +37,7 @@ void main() {
 
     testWidgets('exchange direction switch works', (tester) async {
       await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
+        App(recommendationRepository: recommendationRepository),
       );
       await tester.pumpAndSettle();
 
@@ -54,9 +50,7 @@ void main() {
 
     testWidgets('amount input accepts decimal numbers', (tester) async {
       await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
+        App(recommendationRepository: recommendationRepository),
       );
       await tester.pumpAndSettle();
 
@@ -69,9 +63,7 @@ void main() {
 
     testWidgets('comma to decimal conversion works', (tester) async {
       await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
+        App(recommendationRepository: recommendationRepository),
       );
       await tester.pumpAndSettle();
 
@@ -84,9 +76,7 @@ void main() {
 
     testWidgets('debounced quote requests work', (tester) async {
       await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
+        App(recommendationRepository: recommendationRepository),
       );
       await tester.pumpAndSettle();
 

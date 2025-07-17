@@ -7,7 +7,7 @@ class RecommendationRepository implements RecommendationRepositoryBase {
   const RecommendationRepository({required this.client});
 
   /// The client instance.
-  final HttpClientBase client;
+  final ElDoradoApiClientBase client;
 
   @override
   Future<Recommendation> getRecommendations({

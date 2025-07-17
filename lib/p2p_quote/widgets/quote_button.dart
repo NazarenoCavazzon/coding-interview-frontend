@@ -1,6 +1,7 @@
 import 'package:challenge_eldorado/p2p_quote/cubit/p2p_quote_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:i18n/i18n.dart';
 import 'package:ui/ui.dart';
 
 class QuoteButton extends StatelessWidget {
@@ -8,14 +9,15 @@ class QuoteButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = context.select<P2PQuoteCubit, P2PQuoteState>(
-      (cubit) => cubit.state,
-    );
-
-    return AppButton(
-      title: 'Cambiar',
-      onPressed: () {},
-      isEnabled: state.isSuccess,
+    return BlocBuilder<P2PQuoteCubit, P2PQuoteState>(
+      buildWhen: (previous, current) => previous.isSuccess != current.isSuccess,
+      builder: (context, state) {
+        return AppButton(
+          title: t.common.exchange,
+          onPressed: () {},
+          isEnabled: state.isSuccess,
+        );
+      },
     );
   }
 }

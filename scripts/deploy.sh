@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Deploy script for Challenge Eldorado Flutter Web App
+# Deploy script for Challenge El Dorado Flutter Web App
 
 set -e
 
@@ -18,10 +18,12 @@ flutter pub get
 
 # Get dependencies for local packages
 echo "📦 Getting dependencies for local packages..."
-cd repositories/client && flutter pub get && cd ../..
-cd repositories/i18n && flutter pub get && cd ../..
-cd repositories/ui && flutter pub get && cd ../..
-cd repositories/recommendation_repository && flutter pub get && cd ../..
+for dir in repositories/*/; do
+    if [ -f "$dir/pubspec.yaml" ]; then
+        echo "  📦 Getting dependencies for $(basename "$dir")..."
+        cd "$dir" && flutter pub get && cd ../..
+    fi
+done
 
 # Run tests
 echo "🧪 Running tests..."

@@ -2,8 +2,8 @@ part of 'p2p_quote_cubit.dart';
 
 enum P2PQuoteStatus { initial, loading, success, noData, error }
 
-const defaultFiatCurrency = FiatCurrency.ves;
-const defaultCryptoCurrency = CryptoCurrency.usdt;
+const FiatCurrency defaultFiatCurrency = FiatCurrency.brl;
+const CryptoCurrency defaultCryptoCurrency = CryptoCurrency.usdt;
 
 class P2PQuoteState extends Equatable {
   const P2PQuoteState({

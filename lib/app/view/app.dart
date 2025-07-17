@@ -15,9 +15,11 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider(
-      create: (context) => _recommendationRepository,
-      child: const AppView(),
+    return TranslationProvider(
+      child: RepositoryProvider.value(
+        value: _recommendationRepository,
+        child: const AppView(),
+      ),
     );
   }
 }
@@ -33,7 +35,7 @@ class AppView extends StatelessWidget {
         builder: (context, theme) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'Challenge Eldorado',
+            title: 'Challenge El Dorado',
             theme: theme,
             locale: TranslationProvider.of(context).flutterLocale,
             supportedLocales: AppLocaleUtils.supportedLocales,

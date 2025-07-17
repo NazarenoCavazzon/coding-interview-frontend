@@ -21,9 +21,7 @@ void main() {
 
     testWidgets('app handles empty input correctly', (tester) async {
       await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
+        App(recommendationRepository: recommendationRepository),
       );
       await tester.pumpAndSettle();
 
@@ -36,9 +34,7 @@ void main() {
 
     testWidgets('app handles special characters in input', (tester) async {
       await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
+        App(recommendationRepository: recommendationRepository),
       );
       await tester.pumpAndSettle();
 
@@ -51,9 +47,7 @@ void main() {
 
     testWidgets('app handles rapid input changes', (tester) async {
       await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
+        App(recommendationRepository: recommendationRepository),
       );
       await tester.pumpAndSettle();
 
@@ -70,9 +64,7 @@ void main() {
 
     testWidgets('app handles widget disposal correctly', (tester) async {
       await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
+        App(recommendationRepository: recommendationRepository),
       );
       await tester.pumpAndSettle();
 

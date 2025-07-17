@@ -1,11 +1,11 @@
 {
-    "name": "Challenge Eldorado",
-    "short_name": "Eldorado",
+    "name": "Challenge El Dorado",
+    "short_name": "El Dorado",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#1a1a1a",
     "theme_color": "#3498db",
-    "description": "Challenge Eldorado - P2P Quote Application",
+    "description": "Challenge El Dorado - P2P Quote Application",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

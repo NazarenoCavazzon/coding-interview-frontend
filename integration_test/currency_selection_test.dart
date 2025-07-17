@@ -27,9 +27,7 @@ void main() {
     ) async {
       await tester.binding.setSurfaceSize(const Size(375, 667));
       await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
+        App(recommendationRepository: recommendationRepository),
       );
       await tester.pumpAndSettle();
 
@@ -46,9 +44,7 @@ void main() {
     ) async {
       await tester.binding.setSurfaceSize(const Size(800, 600));
       await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
+        App(recommendationRepository: recommendationRepository),
       );
       await tester.pumpAndSettle();
 
@@ -72,9 +68,7 @@ void main() {
     testWidgets('can select fiat currency from bottom sheet', (tester) async {
       await tester.binding.setSurfaceSize(const Size(375, 667));
       await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
+        App(recommendationRepository: recommendationRepository),
       );
       await tester.pumpAndSettle();
 
@@ -92,9 +86,7 @@ void main() {
     testWidgets('crypto currency selection shows USDT', (tester) async {
       await tester.binding.setSurfaceSize(const Size(375, 667));
       await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
+        App(recommendationRepository: recommendationRepository),
       );
       await tester.pumpAndSettle();
 
@@ -112,9 +104,7 @@ void main() {
     ) async {
       await tester.binding.setSurfaceSize(const Size(375, 667));
       await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
+        App(recommendationRepository: recommendationRepository),
       );
       await tester.pumpAndSettle();
 
@@ -133,9 +123,7 @@ void main() {
     testWidgets('radio buttons work correctly', (tester) async {
       await tester.binding.setSurfaceSize(const Size(375, 667));
       await tester.pumpWidget(
-        TranslationProvider(
-          child: App(recommendationRepository: recommendationRepository),
-        ),
+        App(recommendationRepository: recommendationRepository),
       );
       await tester.pumpAndSettle();
 

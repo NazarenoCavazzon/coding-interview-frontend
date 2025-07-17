@@ -5,7 +5,7 @@ import 'package:recommendation_repository/recommendation_repository.dart';
 import 'package:test/test.dart';
 
 // Mock client for testing
-class MockClient implements HttpClientBase {
+class MockClient implements ElDoradoApiClientBase {
   MockClient(this._handler);
 
   final Future<Map<String, dynamic>> Function(
